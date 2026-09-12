@@ -1,4 +1,4 @@
-baseURL = 'https://kishanml.github.io/portfolio/'
+baseURL = 'https://kishanml.github.io/'
 locale = 'en-in'
 defaultContentLanguage = 'en'
 title = 'Kishan Mishra'

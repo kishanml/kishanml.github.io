@@ -22,7 +22,7 @@ stack:
   - "Go"
 ---
 
-I’m a 24-year-old nerd from India who likes learning about science, arts, and people.
+I’m a 24-year-old computer science and math enthusiast who enjoys exploring science, art, and people.
 
 I’m naturally curious and have a lot of different interests. I enjoy connecting ideas from different areas because it often helps me look at a problem in a different way.
 

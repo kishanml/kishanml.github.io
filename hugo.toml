@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://kishanml.github.io/portfolio/'
 locale = 'en-in'
 defaultContentLanguage = 'en'
 title = 'Kishan Mishra'
@@ -16,8 +16,6 @@ timeout = "60s"
   description = "Kishan Mishra — data scientist working on forecasting, ML systems, and the data plumbing underneath them. Notes, projects, and writeups."
   email = "kishanmldev@gmail.com"
   avatarInitials = "KM"
-  # Used for Open Graph / Twitter cards. Drop a 1200x630 image at static/og.png.
-  ogImage = "og.png"
   twitter = "@example"
   demoNotice = true
 

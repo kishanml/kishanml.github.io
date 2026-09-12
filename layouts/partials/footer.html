@@ -1,0 +1,16 @@
+{{ $links := (site.GetPage "links").Params.links }}
+<footer class="site-footer">
+  <span class="copyright">
+    &copy; {{ now.Year }} {{ .Site.Params.name }}
+    {{- if .Site.Params.demoNotice }} &middot; demo site, placeholder content{{ end }}
+  </span>
+  <div class="footer-links">
+    {{- range first 3 $links }}
+    <a href="{{ .url }}" class="footer-link" rel="me noopener">{{ .name }}</a>
+    {{- end }}
+    <a href="{{ "/index.xml" | relURL }}" class="footer-link">RSS</a>
+    <a href="{{ "/links/" | relURL }}" class="footer-link-accent">All links &rarr;</a>
+  </div>
+</footer>
+{{- $js := resources.Get "js/theme.js" | minify | fingerprint "sha256" }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

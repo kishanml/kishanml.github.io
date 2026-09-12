@@ -1,0 +1,9 @@
+{{ define "main" }}
+<h1 class="page-title mb-6">404</h1>
+<p class="lead">That page doesn't exist — it may have been renamed or never existed at all.</p>
+<div class="social-row">
+  <a href="{{ "/" | relURL }}" class="link-accent">Home &rarr;</a>
+  <a href="{{ "/projects/" | relURL }}" class="link-accent">Projects &rarr;</a>
+  <a href="{{ "/articles/" | relURL }}" class="link-accent">Articles &rarr;</a>
+</div>
+{{ end }}

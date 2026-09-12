@@ -1,0 +1,71 @@
+{{ define "main" }}
+<article class="post">
+  <a href="{{ .Parent.RelPermalink }}" class="back-link">&larr; {{ .Parent.Title }}</a>
+  <h1 class="page-title mb-6">{{ .Title }}</h1>
+
+  {{ if eq .Section "projects" }}
+  <p class="post-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2006" }}</time>
+    {{- if .Params.featured }} &middot; featured{{ end }}
+  </p>
+  {{ with .Params.stack }}
+  <div class="tag-row single-tags">
+    {{- range . }}<span class="tag">{{ . }}</span>{{ end }}
+  </div>
+  {{ end }}
+  {{ if or .Params.repo .Params.demo }}
+  <div class="project-links-block">
+    {{- with .Params.repo }}<a class="link-source" href="{{ . }}" rel="noopener">source &#8599;</a>{{ end }}
+    {{- with .Params.demo }}<a class="link-source" href="{{ . }}" rel="noopener">demo &#8599;</a>{{ end }}
+  </div>
+  {{ end }}
+  {{ else }}
+  <p class="post-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{- with .Params.publication }} &middot; {{ . }}{{ end }}
+    {{- with .Params.kind }} &middot; {{ . | title }}{{ end }}
+    {{- with .Params.rating }} &middot; {{ . }}{{ end }}
+    {{- if ge .ReadingTime 1 }} &middot; {{ .ReadingTime }} min read{{ end }}
+  </p>
+  {{ with .Params.tags }}
+  <div class="tag-row single-tags">
+    {{- range . }}<a class="tag tag-link" href="{{ (printf "/tags/%s/" (. | urlize)) | relURL }}">#{{ . }}</a>{{ end }}
+  </div>
+  {{ end }}
+  {{ end }}
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+</article>
+
+{{ $sib := where site.RegularPages "Section" .Section }}
+{{ $sorted := $sib.ByDate.Reverse }}
+{{ $prev := "" }}{{ $next := "" }}
+{{ range $i, $p := $sorted }}
+  {{ if eq $p.RelPermalink $.RelPermalink }}
+    {{ if gt $i 0 }}{{ $next = index $sorted (sub $i 1) }}{{ end }}
+    {{ if lt (add $i 1) (len $sorted) }}{{ $prev = index $sorted (add $i 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if or $prev $next }}
+<nav class="post-nav" aria-label="More in {{ .Parent.Title }}">
+  <div class="post-nav-slot">
+    {{ with $next }}
+    <a href="{{ .RelPermalink }}" class="post-nav-link">
+      <span class="post-nav-label">&larr; Newer</span>
+      <span class="post-nav-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+  <div class="post-nav-slot post-nav-slot--end">
+    {{ with $prev }}
+    <a href="{{ .RelPermalink }}" class="post-nav-link">
+      <span class="post-nav-label">Older &rarr;</span>
+      <span class="post-nav-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+</nav>
+{{ end }}
+{{ end }}

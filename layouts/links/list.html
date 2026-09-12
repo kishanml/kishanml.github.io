@@ -1,0 +1,13 @@
+{{ define "main" }}
+<h1 class="page-title mb-6">{{ .Title }}</h1>
+{{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+
+<div class="links-list">
+  {{ range .Params.links }}
+  <a class="link-row" href="{{ .url }}">
+    <span class="link-name">{{ .name }}</span>
+    {{ with .description }}<span class="link-desc">{{ . }}</span>{{ end }}
+  </a>
+  {{ end }}
+</div>
+{{ end }}

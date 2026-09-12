@@ -1,0 +1,80 @@
+baseURL = 'https://example.org/'
+locale = 'en-in'
+defaultContentLanguage = 'en'
+title = 'Kishan Mishra'
+enableRobotsTXT = true
+enableEmoji = false
+enableGitInfo = false
+summaryLength = 30
+timeout = "60s"
+
+[params]
+  name = "Kishan Mishra"
+  role = "Data Scientist"
+  location = "Pune, Maharashtra"
+  tagline = "Data science and ML engineering — turning messy data into models that survive production."
+  description = "Kishan Mishra — data scientist working on forecasting, ML systems, and the data plumbing underneath them. Notes, projects, and writeups."
+  email = "kishanmldev@gmail.com"
+  avatarInitials = "KM"
+  # Used for Open Graph / Twitter cards. Drop a 1200x630 image at static/og.png.
+  ogImage = "og.png"
+  twitter = "@example"
+  demoNotice = true
+
+[minify]
+  disableXML = true
+  [minify.tdewolff.html]
+    keepDocumentTags = true
+    keepEndTags = true
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.6
+  filename = "sitemap.xml"
+
+[services]
+  [services.rss]
+    limit = 20
+
+[taxonomies]
+  tag = "tags"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Career"
+  url = "/career/"
+  weight = 2
+
+[[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 3
+
+[[menu.main]]
+  name = "Blogs"
+  url = "/blogs/"
+  weight = 4
+
+[[menu.main]]
+  name = "Links"
+  url = "/links/"
+  weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+    tabWidth = 2
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

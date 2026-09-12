@@ -1,0 +1,9 @@
+{{ define "main" }}
+<h1 class="page-title mb-6">{{ .Title }}</h1>
+<p class="lead">Everything I've written, grouped by topic.</p>
+<div class="tag-row skill-row">
+  {{- range .Data.Terms.ByCount }}
+  <a class="skill tag-link" href="{{ .Page.RelPermalink }}">{{ replace (lower .Page.Title) "-" " " }} <span class="tag-count">{{ .Count }}</span></a>
+  {{- end }}
+</div>
+{{ end }}

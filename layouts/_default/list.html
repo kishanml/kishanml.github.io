@@ -1,0 +1,50 @@
+{{ define "main" }}
+<h1 class="page-title mb-6">{{ if eq .Kind "term" }}#{{ lower .Title }}{{ else }}{{ .Title }}{{ end }}</h1>
+{{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+{{ if eq .Kind "term" }}<p class="lead">{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }} tagged &ldquo;{{ lower .Title }}&rdquo;.</p>{{ end }}
+
+{{ if eq .Section "projects" }}
+<div class="project-grid">
+  {{- range .Pages.ByDate.Reverse }}
+  <article class="project-card">
+    <div class="project-head">
+      <a class="project-name" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <div class="project-links">
+        {{- with .Params.repo }}<a class="link-source" href="{{ . }}" rel="noopener">source &#8599;</a>{{ end }}
+        {{- with .Params.demo }}<a class="link-source" href="{{ . }}" rel="noopener">demo &#8599;</a>{{ end }}
+      </div>
+    </div>
+    <p class="project-desc">{{ .Params.description }}</p>
+    {{- with .Params.stack }}
+    <div class="tag-row">
+      {{- range . }}<span class="tag">{{ . }}</span>{{ end }}
+    </div>
+    {{- end }}
+  </article>
+  {{- end }}
+</div>
+
+{{ else }}
+{{ $pages := .Pages.ByDate.Reverse }}
+{{ $years := slice }}
+{{ range $pages }}{{ $years = $years | append (.Date.Format "2006") }}{{ end }}
+{{ $years = $years | uniq }}
+{{ range $years }}
+{{ $year := . }}
+<h2 class="section-label mb-8">{{ $year }}</h2>
+<div class="post-list post-list--gap">
+  {{- range $pages }}
+  {{- if eq (.Date.Format "2006") $year }}
+  <a href="{{ .RelPermalink }}" class="post-row">
+    <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+    <div>
+      <p class="post-title">{{ .Title }}{{ with .Params.kind }} <span class="tag">{{ . | title }}</span>{{ end }}</p>
+      {{- with .Params.description }}<p class="post-desc">{{ . }}</p>{{ end }}
+    </div>
+  </a>
+  {{- end }}
+  {{- end }}
+</div>
+{{ end }}
+{{ end }}
+{{ end }}

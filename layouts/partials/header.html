@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="header-top">
+    <a href="{{ "/" | relURL }}" class="brand">
+      <span class="brand-name">{{ .Site.Params.name }}</span>
+      <span class="brand-role">{{ .Site.Params.role }}</span>
+    </a>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark theme" aria-pressed="false">dark</button>
+  </div>
+  <nav class="nav" aria-label="Main">
+    {{- $current := .RelPermalink }}
+    {{- range .Site.Menus.main }}
+    {{- $url := .URL | relURL }}
+    {{- $active := or (eq $current $url) (and (ne $url ("/" | relURL)) (hasPrefix $current $url)) }}
+    <a href="{{ $url }}" class="nav-link{{ if $active }} active{{ end }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+  </nav>
+</header>

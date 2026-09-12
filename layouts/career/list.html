@@ -1,0 +1,55 @@
+{{ define "main" }}
+<div class="row-between mb-6">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.lastUpdated }}<span class="meta-note">Updated {{ . }}</span>{{ end }}
+</div>
+{{ with .Params.description }}<p class="lead">{{ . }}</p>{{ end }}
+
+{{ with .Params.experience }}
+<h2 class="section-label mb-14">Experience</h2>
+<div class="mb-32">
+  {{- range . }}
+  <div class="job">
+    <div class="row-between">
+      <p class="job-title">{{ .role }} &middot; {{ .company }}</p>
+      <span class="job-date">{{ .period }}</span>
+    </div>
+    {{- with .meta }}<p class="job-meta">{{ . }}</p>{{ end }}
+    {{- with .points }}
+    <ul class="job-points">
+      {{- range . }}<li>{{ . }}</li>{{ end }}
+    </ul>
+    {{- end }}
+  </div>
+  {{- end }}
+</div>
+{{ end }}
+
+{{ with .Params.methods }}
+<h2 class="section-label mb-14">Methods</h2>
+<ul class="focus-list mb-32">
+  {{- range . }}
+  <li class="focus-item"><span class="focus-arrow" aria-hidden="true">&rsaquo;</span><span>{{ . }}</span></li>
+  {{- end }}
+</ul>
+{{ end }}
+
+{{ with .Params.skills }}
+<h2 class="section-label mb-14">Tools</h2>
+<div class="tag-row skill-row mb-32">
+  {{- range . }}<span class="skill">{{ . }}</span>{{ end }}
+</div>
+{{ end }}
+
+{{ with .Params.education }}
+<h2 class="section-label mb-14">Education</h2>
+<div class="mb-32">
+  {{- range . }}
+  <div class="row-between edu-row">
+    <p class="job-title mb-0">{{ .degree }}{{ with .school }}, {{ . }}{{ end }}</p>
+    <span class="job-date">{{ .period }}</span>
+  </div>
+  {{- end }}
+</div>
+{{ end }}
+{{ end }}
